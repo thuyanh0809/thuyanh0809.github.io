@@ -5,138 +5,209 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thuỳ Anh Solution — App &amp; Game Publisher</title>
 <meta name="description" content="Thuỳ Anh Solution — studio phát triển và phát hành ứng dụng, trò chơi di động trên iOS và Android.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='58' fill='%231A57C0'/%3E%3Ctext x='128' y='150' text-anchor='middle' font-family='Arial' font-weight='800' font-size='132' fill='white'%3ETA%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20256%20256'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%2334E3FF'/%3E%3Cstop%20offset='.5'%20stop-color='%234F8DFF'/%3E%3Cstop%20offset='1'%20stop-color='%237C5CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='256'%20height='256'%20rx='60'%20fill='url(%23g)'/%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='18'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M90%2078%20H166'/%3E%3Cpath%20d='M128%2078%20V150'/%3E%3Cpath%20d='M90%2078%20L74%20184'/%3E%3Cpath%20d='M166%2078%20L182%20184'/%3E%3Cpath%20d='M98%20150%20H158'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap&subset=vietnamese,latin" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap&subset=vietnamese,latin" rel="stylesheet">
 <style>
   :root{
-    --bg:#FFFFFF;
-    --bg-soft:#F3F8FF;
-    --surface:#FFFFFF;
-    --surface-2:#EEF4FF;
-    --line:#E2EBF7;
-    --navy:#0E2240;
-    --navy-2:#13315C;
-    --muted:#5C6E8C;
-    --blue:#2D7FF0;
-    --blue-d:#1357C9;
-    --grad:linear-gradient(135deg,#3A8DFF 0%,#1A57C0 55%,#0E2A6B 100%);
+    /* dark ink base */
+    --bg:#070A16;
+    --bg-2:#0A0F22;
+    --surface:rgba(255,255,255,.035);
+    --surface-2:rgba(255,255,255,.05);
+    --line:rgba(160,185,255,.12);
+    --line-2:rgba(160,185,255,.22);
+
+    --text:#EAF0FF;
+    --text-2:#C3CEEA;
+    --muted:#8290B4;
+
+    --cyan:#34E3FF;
+    --blue:#4F8DFF;
+    --indigo:#7C5CFF;
+    --amber:#FFC24B;
+    --green:#3DE08A;
+
+    --grad:linear-gradient(135deg,#34E3FF 0%,#4F8DFF 48%,#7C5CFF 100%);
+    --grad-soft:linear-gradient(135deg,rgba(52,227,255,.18),rgba(124,92,255,.18));
+
     --display:'Be Vietnam Pro',sans-serif;
     --body:'Be Vietnam Pro',sans-serif;
-    --logo:'Poppins',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--body);background:var(--bg);color:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* ── atmospheric background: aurora mesh + grid + grain ── */
+  .bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bg-aurora::before{content:"";position:absolute;inset:-20%;
     background:
-      radial-gradient(680px 480px at 85% -8%, rgba(58,141,255,.16), transparent 62%),
-      radial-gradient(560px 460px at -5% 18%, rgba(58,141,255,.10), transparent 60%),
-      radial-gradient(700px 540px at 50% 115%, rgba(26,87,192,.08), transparent 60%);}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+      radial-gradient(46rem 40rem at 82% -6%, rgba(124,92,255,.30), transparent 60%),
+      radial-gradient(40rem 38rem at 8% 12%, rgba(52,227,255,.22), transparent 58%),
+      radial-gradient(50rem 46rem at 60% 108%, rgba(79,141,255,.22), transparent 60%);
+    filter:blur(20px);animation:drift 22s ease-in-out infinite alternate}
+  @keyframes drift{
+    0%{transform:translate3d(0,0,0) scale(1)}
+    50%{transform:translate3d(-2.5%,2%,0) scale(1.06)}
+    100%{transform:translate3d(2.5%,-1.5%,0) scale(1.03)}}
+  .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(160,185,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(160,185,255,.05) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 90% at 50% 0%,#000 35%,transparent 78%);
+            mask-image:radial-gradient(120% 90% at 50% 0%,#000 35%,transparent 78%)}
+  .bg-grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* nav */
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,.78);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy)}
-  .brand .mk{width:42px;height:42px;flex:none}
-  .brand .txt b{font-family:var(--logo);font-weight:800;font-size:1.18rem;letter-spacing:-.01em;line-height:1;display:block;color:var(--navy)}
-  .brand .txt span{font-family:var(--logo);display:block;font-size:.6rem;letter-spacing:.34em;color:var(--blue);text-transform:uppercase;margin-top:3px;font-weight:600}
-  .nav-links{display:flex;gap:32px;align-items:center}
-  .nav-links a{color:var(--navy-2);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
-  .nav-links a:hover{color:var(--blue)}
-  .btn{display:inline-block;background:var(--grad);color:#fff;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 22px rgba(45,127,240,.32)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(45,127,240,.42)}
-  @media(max-width:760px){.nav-links a:not(.btn){display:none}}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
 
-  /* hero */
-  .hero{padding:96px 0 78px}
-  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--navy-2);padding:7px 16px;border-radius:999px;font-size:.8rem;font-weight:500;margin-bottom:28px;box-shadow:0 4px 14px rgba(14,34,64,.05);opacity:0;animation:rise .7s .05s forwards}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue)}
-  h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.04;letter-spacing:-.03em;max-width:15ch;opacity:0;animation:rise .8s .15s forwards}
+  /* ── nav ── */
+  header{position:sticky;top:0;z-index:60;backdrop-filter:blur(16px) saturate(140%);
+    background:linear-gradient(180deg,rgba(7,10,22,.82),rgba(7,10,22,.55));
+    border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--text)}
+  .brand .mk{width:44px;height:44px;flex:none;filter:drop-shadow(0 6px 18px rgba(79,141,255,.45))}
+  .brand .txt b{font-family:var(--display);font-weight:800;font-size:1.16rem;letter-spacing:-.01em;line-height:1;display:block;color:var(--text)}
+  .brand .txt span{font-family:var(--mono);display:block;font-size:.58rem;letter-spacing:.42em;color:var(--cyan);text-transform:uppercase;margin-top:5px;font-weight:500}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{color:var(--text-2);text-decoration:none;font-size:.92rem;font-weight:500;position:relative;transition:color .2s}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;border-radius:2px;background:var(--grad);transition:width .25s ease}
+  .nav-links a:not(.btn):hover{color:var(--text)}
+  .nav-links a:not(.btn):hover::after{width:100%}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#06122B;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;transition:transform .2s,box-shadow .2s;box-shadow:0 10px 28px rgba(79,141,255,.35)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(79,141,255,.5)}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* ── hero ── */
+  .hero{padding:118px 0 92px;position:relative}
+  .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line-2);
+    background:var(--surface);color:var(--text-2);padding:8px 16px;border-radius:999px;
+    font-size:.78rem;font-weight:500;margin-bottom:30px;backdrop-filter:blur(8px);
+    opacity:0;animation:rise .7s .05s forwards}
+  .pill .mono{font-family:var(--mono);letter-spacing:.04em;font-size:.72rem;color:var(--cyan)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(52,227,255,.18),0 0 14px var(--cyan);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(52,227,255,.18),0 0 14px var(--cyan)}50%{box-shadow:0 0 0 7px rgba(52,227,255,.06),0 0 20px var(--cyan)}}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(2.6rem,6.2vw,5rem);line-height:1.02;letter-spacing:-.035em;max-width:16ch;opacity:0;animation:rise .8s .15s forwards}
   h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lede{margin-top:24px;font-size:clamp(1.05rem,2vw,1.26rem);color:var(--muted);max-width:54ch;opacity:0;animation:rise .8s .3s forwards}
-  .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .8s .45s forwards}
-  .btn-ghost{display:inline-block;border:1px solid var(--line);background:#fff;color:var(--navy);text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;font-weight:600;transition:border-color .2s,transform .2s}
-  .btn-ghost:hover{border-color:var(--blue);transform:translateY(-2px)}
-  .stats{display:flex;gap:46px;margin-top:60px;flex-wrap:wrap;opacity:0;animation:rise .8s .6s forwards}
-  .stat .n{font-family:var(--display);font-weight:800;font-size:1.8rem;letter-spacing:-.02em;color:var(--navy)}
-  .stat .l{color:var(--muted);font-size:.86rem}
-  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  .lede{margin-top:26px;font-size:clamp(1.05rem,1.6vw,1.28rem);color:var(--text-2);max-width:56ch;opacity:0;animation:rise .8s .3s forwards}
+  .cta-row{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .8s .45s forwards}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);background:var(--surface);color:var(--text);text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;font-weight:600;backdrop-filter:blur(8px);transition:border-color .2s,transform .2s,background .2s}
+  .btn-ghost:hover{border-color:var(--cyan);transform:translateY(-2px);background:var(--surface-2)}
+  .stats{display:flex;gap:48px;margin-top:64px;flex-wrap:wrap;opacity:0;animation:rise .8s .6s forwards}
+  .stat .n{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{color:var(--muted);font-size:.84rem;margin-top:2px}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-  section{padding:80px 0}
-  .eyebrow{color:var(--blue);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;margin-bottom:12px}
-  h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.02em;line-height:1.1;max-width:18ch;color:var(--navy)}
-  .sec-lede{color:var(--muted);max-width:56ch;margin-top:14px;font-size:1.05rem}
+  section{padding:92px 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);color:var(--cyan);font-weight:500;letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;margin-bottom:16px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.025em;line-height:1.08;max-width:19ch;color:var(--text)}
+  .sec-lede{color:var(--text-2);max-width:58ch;margin-top:16px;font-size:1.06rem}
 
-  /* products */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ── products ── */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
   @media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;transition:transform .25s,box-shadow .25s,border-color .25s;box-shadow:0 6px 20px rgba(14,34,64,.05)}
-  .card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(14,34,64,.12);border-color:#cfe0fb}
-  .game-ico{width:64px;height:64px;border-radius:16px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 20px rgba(14,34,64,.18)}
+  .card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:28px;
+    transition:transform .3s,box-shadow .3s,border-color .3s,background .3s;backdrop-filter:blur(10px);overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:linear-gradient(135deg,rgba(52,227,255,.5),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s}
+  .card:hover{transform:translateY(-8px);background:var(--surface-2);border-color:transparent;box-shadow:0 24px 50px rgba(3,8,24,.6)}
+  .card:hover::before{opacity:1}
+  .game-ico{width:66px;height:66px;border-radius:18px;overflow:hidden;margin-bottom:20px;box-shadow:0 12px 26px rgba(3,8,24,.55),inset 0 1px 0 rgba(255,255,255,.25)}
   .game-ico svg{width:100%;height:100%;display:block}
-  .card h3{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
-  .card .meta{color:var(--blue);font-size:.78rem;margin-top:3px;font-weight:600}
-  .card p{color:var(--muted);font-size:.94rem;margin-top:8px}
-  .badges{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
-  .badge{font-size:.72rem;color:var(--muted);border:1px solid var(--line);padding:4px 11px;border-radius:999px;background:#fff}
-  .badge.live{color:#0c5a2f;background:#dbf6e6;border-color:#bdeccf;font-weight:700}
-  .badge.dev{color:var(--blue-d);background:#e7f0ff;border-color:#cfe0fb;font-weight:600}
-  .store-btn{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:var(--grad);color:#fff;text-decoration:none;font-weight:600;font-size:.84rem;padding:9px 16px;border-radius:11px;transition:transform .2s;box-shadow:0 6px 16px rgba(45,127,240,.3)}
-  .store-btn:hover{transform:translateY(-2px)}
+  .card h3{font-family:var(--display);font-weight:700;font-size:1.24rem;letter-spacing:-.01em;color:var(--text)}
+  .card .meta{color:var(--cyan);font-size:.76rem;margin-top:4px;font-weight:600;font-family:var(--mono);letter-spacing:.02em}
+  .card p{color:var(--text-2);font-size:.94rem;margin-top:10px}
+  .badges{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{font-size:.72rem;color:var(--text-2);border:1px solid var(--line);padding:5px 12px;border-radius:999px;background:var(--surface)}
+  .badge.live{color:#86ffc0;background:rgba(61,224,138,.12);border-color:rgba(61,224,138,.35);font-weight:700}
+  .badge.dev{color:#bcd2ff;background:rgba(79,141,255,.13);border-color:rgba(79,141,255,.35);font-weight:600}
+  .store-btn{display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:var(--grad);color:#06122B;text-decoration:none;font-weight:700;font-size:.84rem;padding:10px 16px;border-radius:12px;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 20px rgba(79,141,255,.32)}
+  .store-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(79,141,255,.45)}
 
-  /* services */
-  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  /* ── services ── */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
   @media(max-width:760px){.services{grid-template-columns:1fr}}
-  .svc{padding:26px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line)}
-  .svc .ic{font-size:1.6rem;margin-bottom:12px}
-  .svc h4{font-family:var(--display);font-weight:700;font-size:1.1rem;margin-bottom:6px}
-  .svc p{color:var(--muted);font-size:.92rem}
+  .svc{padding:30px;border-radius:22px;background:var(--surface);border:1px solid var(--line);backdrop-filter:blur(10px);transition:transform .3s,border-color .3s,background .3s}
+  .svc:hover{transform:translateY(-6px);border-color:var(--line-2);background:var(--surface-2)}
+  .svc .ic{width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--grad-soft);border:1px solid var(--line-2);font-size:1.5rem;margin-bottom:16px}
+  .svc h4{font-family:var(--display);font-weight:700;font-size:1.12rem;margin-bottom:8px;color:var(--text)}
+  .svc p{color:var(--text-2);font-size:.92rem}
 
-  /* about */
-  .about{background:linear-gradient(160deg,#F4F8FF,#FFFFFF);border:1px solid var(--line);border-radius:28px;padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;box-shadow:0 10px 30px rgba(14,34,64,.06)}
-  @media(max-width:760px){.about{grid-template-columns:1fr;gap:28px}}
-  .about ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:13px}
-  .about li{display:flex;gap:12px;color:var(--navy);font-size:.98rem}
-  .about li b{color:var(--muted);font-weight:500;min-width:118px;display:inline-block}
-  .check{color:var(--blue);flex:none;font-weight:700}
-  .biglogo{display:flex;align-items:center;justify-content:center}
-  .biglogo svg{width:min(100%,300px);height:auto}
+  /* ── about ── */
+  .about{position:relative;background:linear-gradient(160deg,rgba(124,92,255,.10),rgba(52,227,255,.06));
+    border:1px solid var(--line);border-radius:30px;padding:clamp(34px,5vw,60px);
+    display:grid;grid-template-columns:1.2fr 1fr;gap:52px;align-items:center;
+    box-shadow:0 30px 70px rgba(3,8,24,.5);backdrop-filter:blur(12px);overflow:hidden}
+  .about::after{content:"";position:absolute;width:360px;height:360px;right:-120px;top:-120px;border-radius:50%;
+    background:radial-gradient(circle,rgba(124,92,255,.35),transparent 65%);pointer-events:none}
+  @media(max-width:760px){.about{grid-template-columns:1fr;gap:30px}}
+  .about ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:14px}
+  .about li{display:flex;gap:12px;color:var(--text);font-size:.98rem;align-items:flex-start}
+  .about li b{color:var(--muted);font-weight:500;min-width:120px;display:inline-block}
+  .check{color:var(--cyan);flex:none;font-weight:700;margin-top:1px}
+  .biglogo{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}
+  .biglogo .mark{width:min(100%,260px);height:auto;filter:drop-shadow(0 24px 50px rgba(79,141,255,.5))}
+  .biglogo .wm{margin-top:24px;text-align:center}
+  .biglogo .wm b{display:block;font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:.02em;color:var(--text)}
+  .biglogo .wm .sol{display:block;font-family:var(--mono);font-weight:500;font-size:.8rem;letter-spacing:.5em;color:var(--cyan);margin-top:6px}
+  .biglogo .wm .tag{display:block;font-family:var(--mono);font-weight:500;font-size:.64rem;letter-spacing:.28em;color:var(--muted);margin-top:12px}
 
-  /* contact */
-  .contact{text-align:center;background:var(--grad);border-radius:28px;padding:clamp(40px,6vw,70px);color:#fff;box-shadow:0 18px 44px rgba(26,87,192,.32)}
-  .contact h2{color:#fff;margin:0 auto}
-  .contact p{color:rgba(255,255,255,.9);max-width:46ch;margin:14px auto 28px;font-weight:400}
-  .mail{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--navy);text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:600;font-size:1.02rem;transition:transform .2s}
-  .mail:hover{transform:translateY(-2px)}
+  /* ── contact ── */
+  .contact{position:relative;text-align:center;border-radius:30px;padding:clamp(44px,6vw,76px);overflow:hidden;
+    background:linear-gradient(135deg,#0d1840,#10204f 55%,#1a1450);
+    border:1px solid var(--line-2);box-shadow:0 30px 70px rgba(3,8,24,.6)}
+  .contact::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(40rem 22rem at 50% -10%,rgba(52,227,255,.28),transparent 60%);pointer-events:none}
+  .contact h2{color:#fff;margin:0 auto;max-width:20ch;position:relative}
+  .contact p{color:rgba(226,234,255,.82);max-width:48ch;margin:16px auto 30px;font-weight:400;position:relative}
+  .mail{position:relative;display:inline-flex;align-items:center;gap:11px;background:var(--grad);color:#06122B;text-decoration:none;padding:16px 30px;border-radius:999px;font-weight:700;font-size:1.02rem;transition:transform .2s,box-shadow .2s;box-shadow:0 14px 34px rgba(79,141,255,.45)}
+  .mail:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(79,141,255,.6)}
 
-  /* footer */
-  footer{border-top:1px solid var(--line);padding:46px 0 60px;margin-top:16px}
-  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-  .foot-links{display:flex;gap:24px;flex-wrap:wrap}
-  .foot-links a{color:var(--muted);text-decoration:none;font-size:.9rem}
-  .foot-links a:hover{color:var(--blue)}
-  .copy{color:var(--muted);font-size:.84rem;margin-top:22px}
-  .verify-note{font-size:.82rem;color:var(--muted);margin-top:10px;max-width:60ch}
-  .verify-note code{background:var(--surface-2);padding:2px 7px;border-radius:6px;color:var(--blue-d);font-size:.92em}
+  /* ── footer ── */
+  footer{border-top:1px solid var(--line);padding:52px 0 64px;margin-top:24px}
+  .foot{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:center}
+  .foot .brand .mk{width:40px;height:40px}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap}
+  .foot-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+  .foot-links a:hover{color:var(--cyan)}
+  .copy{color:var(--muted);font-size:.84rem;margin-top:26px}
+  .verify-note{font-size:.82rem;color:var(--muted);margin-top:14px;max-width:64ch}
+  .verify-note code{font-family:var(--mono);background:var(--surface-2);padding:2px 8px;border-radius:6px;color:var(--cyan);font-size:.9em;border:1px solid var(--line)}
 </style>
 </head>
 <body>
 
+<div class="bg-aurora"></div>
+<div class="bg-grid"></div>
+<div class="bg-grain"></div>
+
 <header>
   <div class="wrap">
     <nav>
-      <a class="brand" href="#top">
+      <a class="brand" href="#top" aria-label="Thuỳ Anh Solution">
         <svg class="mk" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <linearGradient id="tileb_h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A8DFF"/><stop offset=".55" stop-color="#1A57C0"/><stop offset="1" stop-color="#0C2148"/></linearGradient>
+            <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34E3FF"/><stop offset=".5" stop-color="#4F8DFF"/><stop offset="1" stop-color="#7C5CFF"/></linearGradient>
+            <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
           </defs>
-          <rect x="16" y="16" width="224" height="224" rx="58" fill="url(#tileb_h)"/>
-          <text x="128" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="132" letter-spacing="-6" fill="#fff">TA</text>
-          <path d="M196 60 L200 72 L212 76 L200 80 L196 92 L192 80 L180 76 L192 72 Z" fill="#9FD0FF"/>
+          <rect x="18" y="18" width="220" height="220" rx="58" fill="url(#tile)"/>
+          <rect x="18" y="18" width="220" height="220" rx="58" fill="url(#gloss)"/>
+          <g fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M90 78 H166"/><path d="M128 78 V150"/><path d="M90 78 L74 184"/><path d="M166 78 L182 184"/><path d="M98 150 H158"/>
+          </g>
+          <path d="M198 52 l4.5 12 12 4.5 -12 4.5 -4.5 12 -4.5 -12 -12 -4.5 12 -4.5z" fill="#fff" opacity=".95"/>
         </svg>
         <span class="txt"><b>Thuỳ Anh</b><span>Solution</span></span>
       </a>
@@ -144,7 +215,7 @@
         <a href="#products">Sản phẩm</a>
         <a href="#services">Dịch vụ</a>
         <a href="#about">Về chúng tôi</a>
-        <a class="btn" href="#contact">Liên hệ</a>
+        <a class="btn" href="#contact">Liên hệ ↗</a>
       </div>
     </nav>
   </div>
@@ -153,7 +224,7 @@
 <a id="top"></a>
 <section class="hero">
   <div class="wrap">
-    <div class="pill"><span class="dot"></span> App &amp; Game Publisher · iOS | Android</div>
+    <div class="pill"><span class="dot"></span> App &amp; Game Publisher <span class="mono">· iOS / Android</span></div>
     <h1>Chúng tôi tạo ra <em>app &amp; game</em> mọi người yêu thích.</h1>
     <p class="lede">Thuỳ Anh Solution thiết kế, phát triển và phát hành ứng dụng cùng trò chơi di động trên App Store và CH Play — tập trung vào trải nghiệm mượt mà và sản phẩm bền vững.</p>
     <div class="cta-row">
@@ -169,7 +240,7 @@
 </section>
 
 <section id="products">
-  <div class="wrap">
+  <div class="wrap reveal">
     <p class="eyebrow">Sản phẩm</p>
     <h2>Trò chơi của chúng tôi</h2>
     <p class="sec-lede">Các trò chơi do Thuỳ Anh Solution phát triển và phát hành trên App Store và CH Play.</p>
@@ -178,11 +249,16 @@
       <div class="card">
         <div class="game-ico">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5BD06B"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+            <defs>
+              <linearGradient id="gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5BE07A"/><stop offset="1" stop-color="#149E58"/></linearGradient>
+              <linearGradient id="gfgl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
             <rect width="120" height="120" fill="url(#gf)"/>
-            <circle cx="60" cy="64" r="30" fill="#FFFFFF" fill-opacity=".16"/>
-            <path d="M60 30 C44 44 44 70 60 86 C76 70 76 44 60 30 Z" fill="#EFFFF0"/>
-            <path d="M60 36 L60 84" stroke="#1E9E50" stroke-width="3" stroke-linecap="round"/>
+            <rect width="120" height="120" fill="url(#gfgl)"/>
+            <circle cx="60" cy="62" r="33" fill="#FFFFFF" fill-opacity=".14"/>
+            <path d="M60 28 C42 44 42 72 60 90 C78 72 78 44 60 28 Z" fill="#F2FFF3"/>
+            <path d="M60 34 L60 86" stroke="#149E58" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M60 52 L48 44 M60 64 L72 56" stroke="#149E58" stroke-width="3" stroke-linecap="round"/>
             <circle cx="44" cy="40" r="5" fill="#FFD84D"/>
           </svg>
         </div>
@@ -196,16 +272,20 @@
       <div class="card">
         <div class="game-ico">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9433A"/><stop offset="1" stop-color="#8E1B12"/></linearGradient></defs>
+            <defs>
+              <linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E64A3F"/><stop offset="1" stop-color="#8E1B12"/></linearGradient>
+              <linearGradient id="gmgl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".30"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
             <rect width="120" height="120" fill="url(#gm)"/>
-            <rect x="38" y="28" width="44" height="64" rx="8" fill="#F7F2E4"/>
-            <rect x="38" y="28" width="44" height="64" rx="8" fill="none" stroke="#C9A24B" stroke-width="3"/>
-            <circle cx="60" cy="52" r="9" fill="#1E9E50"/>
-            <path d="M60 64 L60 82 M52 73 L68 73" stroke="#D9433A" stroke-width="5" stroke-linecap="round"/>
+            <rect width="120" height="120" fill="url(#gmgl)"/>
+            <rect x="37" y="26" width="46" height="68" rx="9" fill="#F8F3E5"/>
+            <rect x="37" y="26" width="46" height="68" rx="9" fill="none" stroke="#D7B463" stroke-width="3"/>
+            <circle cx="60" cy="50" r="9.5" fill="#149E58"/>
+            <path d="M60 63 L60 84 M51 73 L69 73" stroke="#E64A3F" stroke-width="5.5" stroke-linecap="round"/>
           </svg>
         </div>
         <h3>Mahjong Emperor</h3>
-        <p class="meta">Mahjong / Puzzle</p>
+        <p class="meta">Mahjong · Puzzle</p>
         <p>Trò chơi Mahjong giải đố cổ điển với phong cách hoàng gia. Đang trong quá trình phát triển.</p>
         <div class="badges"><span class="badge dev">◐ Đang phát triển</span></div>
       </div>
@@ -213,11 +293,16 @@
       <div class="card">
         <div class="game-ico">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <rect width="120" height="120" fill="#1B2046"/>
-            <rect x="24" y="24" width="20" height="11" rx="2" fill="#FF7A59"/><rect x="50" y="24" width="20" height="11" rx="2" fill="#FFC24B"/><rect x="76" y="24" width="20" height="11" rx="2" fill="#34E5A8"/>
-            <rect x="24" y="40" width="20" height="11" rx="2" fill="#FFC24B"/><rect x="50" y="40" width="20" height="11" rx="2" fill="#34E5A8"/><rect x="76" y="40" width="20" height="11" rx="2" fill="#FF7A59"/>
-            <circle cx="60" cy="76" r="6" fill="#fff"/>
-            <rect x="40" y="92" width="40" height="8" rx="4" fill="#5AA6F2"/>
+            <defs>
+              <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#27306B"/><stop offset="1" stop-color="#11163A"/></linearGradient>
+              <linearGradient id="gbgl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#gb)"/>
+            <rect width="120" height="120" fill="url(#gbgl)"/>
+            <rect x="22" y="24" width="22" height="12" rx="3" fill="#FF7A59"/><rect x="49" y="24" width="22" height="12" rx="3" fill="#FFC24B"/><rect x="76" y="24" width="22" height="12" rx="3" fill="#34E5A8"/>
+            <rect x="22" y="41" width="22" height="12" rx="3" fill="#FFC24B"/><rect x="49" y="41" width="22" height="12" rx="3" fill="#34E5A8"/><rect x="76" y="41" width="22" height="12" rx="3" fill="#FF7A59"/>
+            <circle cx="60" cy="76" r="6.5" fill="#fff"/>
+            <rect x="38" y="92" width="44" height="9" rx="4.5" fill="#5AA6F2"/>
           </svg>
         </div>
         <h3>Brick Breaker Emperor</h3>
@@ -231,7 +316,7 @@
 </section>
 
 <section id="services">
-  <div class="wrap">
+  <div class="wrap reveal">
     <p class="eyebrow">Năng lực</p>
     <h2>Chúng tôi làm gì</h2>
     <div class="services">
@@ -243,7 +328,7 @@
 </section>
 
 <section id="about">
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="about">
       <div>
         <p class="eyebrow">Về chúng tôi</p>
@@ -257,34 +342,32 @@
         </ul>
       </div>
       <div class="biglogo">
-        <svg viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-label="Thuỳ Anh Solution">
-          <defs>
-            <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA6F2"/><stop offset=".55" stop-color="#2C72DA"/><stop offset="1" stop-color="#0E244C"/></linearGradient>
-            <linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A86F0"/><stop offset="1" stop-color="#15347A"/></linearGradient>
-          </defs>
-          <text x="220" y="178" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="150" letter-spacing="-6" fill="url(#blue)">TA</text>
-          <g fill="#2D7FF0">
-            <path d="M335 58 L340 73 L355 78 L340 83 L335 98 L330 83 L315 78 L330 73 Z"/>
-            <path d="M363 116 L365.5 124 L373 126.5 L365.5 129 L363 137 L360.5 129 L353 126.5 L360.5 124 Z"/>
-          </g>
-          <g fill="#E3ECFA"><circle cx="232" cy="166" r="17"/><circle cx="212" cy="172" r="12"/><circle cx="252" cy="172" r="12"/><circle cx="232" cy="180" r="13"/></g>
-          <path d="M232 66 C220 80 216 96 216 108 L216 152 L248 152 L248 108 C248 96 244 80 232 66 Z" fill="#FFFFFF" stroke="#0E244C" stroke-width="4"/>
-          <path d="M216 134 L201 156 L216 150 Z" fill="url(#fin)"/><path d="M248 134 L263 156 L248 150 Z" fill="url(#fin)"/>
-          <circle cx="232" cy="110" r="10.5" fill="#2D7FF0" stroke="#0E244C" stroke-width="3.5"/>
-          <text x="220" y="300" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="800" font-size="60" letter-spacing="1" fill="#0E244C">THUỲ ANH</text>
-          <line x1="70" y1="335" x2="114" y2="335" stroke="#2D7FF0" stroke-width="3" stroke-linecap="round"/>
-          <line x1="326" y1="335" x2="370" y2="335" stroke="#2D7FF0" stroke-width="3" stroke-linecap="round"/>
-          <text x="220" y="343" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="600" font-size="25" letter-spacing="9" fill="#2C72DA">SOLUTION</text>
-          <text x="220" y="392" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="500" font-size="19" letter-spacing="2.5" fill="#5C6E8C">APP &amp; GAME PUBLISHER</text>
-          <text x="220" y="420" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="500" font-size="19" letter-spacing="2" fill="#5C6E8C">iOS | Android</text>
-        </svg>
+        <div>
+          <svg class="mark" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-label="Thuỳ Anh Solution">
+            <defs>
+              <linearGradient id="tileL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34E3FF"/><stop offset=".5" stop-color="#4F8DFF"/><stop offset="1" stop-color="#7C5CFF"/></linearGradient>
+              <linearGradient id="glossL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".42"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            </defs>
+            <rect x="18" y="18" width="220" height="220" rx="58" fill="url(#tileL)"/>
+            <rect x="18" y="18" width="220" height="220" rx="58" fill="url(#glossL)"/>
+            <g fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M90 78 H166"/><path d="M128 78 V150"/><path d="M90 78 L74 184"/><path d="M166 78 L182 184"/><path d="M98 150 H158"/>
+            </g>
+            <path d="M198 52 l4.5 12 12 4.5 -12 4.5 -4.5 12 -4.5 -12 -12 -4.5 12 -4.5z" fill="#fff" opacity=".95"/>
+          </svg>
+          <div class="wm">
+            <b>THUỲ ANH</b>
+            <span class="sol">SOLUTION</span>
+            <span class="tag">APP &amp; GAME PUBLISHER · iOS / ANDROID</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="contact">
       <h2>Liên hệ hợp tác</h2>
       <p>Bạn muốn hợp tác phát triển, phát hành hoặc quảng bá ứng dụng? Hãy gửi email cho chúng tôi.</p>
@@ -298,10 +381,13 @@
     <div class="foot">
       <a class="brand" href="#top">
         <svg class="mk" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs><linearGradient id="tileb_f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A8DFF"/><stop offset=".55" stop-color="#1A57C0"/><stop offset="1" stop-color="#0C2148"/></linearGradient></defs>
-          <rect x="16" y="16" width="224" height="224" rx="58" fill="url(#tileb_f)"/>
-          <text x="128" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="132" letter-spacing="-6" fill="#fff">TA</text>
-          <path d="M196 60 L200 72 L212 76 L200 80 L196 92 L192 80 L180 76 L192 72 Z" fill="#9FD0FF"/>
+          <defs>
+            <linearGradient id="tileF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34E3FF"/><stop offset=".5" stop-color="#4F8DFF"/><stop offset="1" stop-color="#7C5CFF"/></linearGradient>
+          </defs>
+          <rect x="18" y="18" width="220" height="220" rx="58" fill="url(#tileF)"/>
+          <g fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M90 78 H166"/><path d="M128 78 V150"/><path d="M90 78 L74 184"/><path d="M166 78 L182 184"/><path d="M98 150 H158"/>
+          </g>
         </svg>
         <span class="txt"><b>Thuỳ Anh</b><span>Solution</span></span>
       </a>
@@ -316,6 +402,14 @@
     <p class="copy">© 2026 Thuỳ Anh Solution. Bảo lưu mọi quyền.</p>
   </div>
 </footer>
+
+<script>
+  // staggered scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>

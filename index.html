@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thuỳ Anh Solution — App &amp; Game Publisher</title>
+<meta name="description" content="Thuỳ Anh Solution — studio phát triển và phát hành ứng dụng, trò chơi di động trên iOS và Android.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='58' fill='%231A57C0'/%3E%3Ctext x='128' y='150' text-anchor='middle' font-family='Arial' font-weight='800' font-size='132' fill='white'%3ETA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap&subset=vietnamese,latin" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F3F8FF;
+    --surface:#FFFFFF;
+    --surface-2:#EEF4FF;
+    --line:#E2EBF7;
+    --navy:#0E2240;
+    --navy-2:#13315C;
+    --muted:#5C6E8C;
+    --blue:#2D7FF0;
+    --blue-d:#1357C9;
+    --grad:linear-gradient(135deg,#3A8DFF 0%,#1A57C0 55%,#0E2A6B 100%);
+    --display:'Be Vietnam Pro',sans-serif;
+    --body:'Be Vietnam Pro',sans-serif;
+    --logo:'Poppins',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--bg);color:var(--navy);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(680px 480px at 85% -8%, rgba(58,141,255,.16), transparent 62%),
+      radial-gradient(560px 460px at -5% 18%, rgba(58,141,255,.10), transparent 60%),
+      radial-gradient(700px 540px at 50% 115%, rgba(26,87,192,.08), transparent 60%);}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,.78);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy)}
+  .brand .mk{width:42px;height:42px;flex:none}
+  .brand .txt b{font-family:var(--logo);font-weight:800;font-size:1.18rem;letter-spacing:-.01em;line-height:1;display:block;color:var(--navy)}
+  .brand .txt span{font-family:var(--logo);display:block;font-size:.6rem;letter-spacing:.34em;color:var(--blue);text-transform:uppercase;margin-top:3px;font-weight:600}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{color:var(--navy-2);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--blue)}
+  .btn{display:inline-block;background:var(--grad);color:#fff;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 22px rgba(45,127,240,.32)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(45,127,240,.42)}
+  @media(max-width:760px){.nav-links a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{padding:96px 0 78px}
+  .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--navy-2);padding:7px 16px;border-radius:999px;font-size:.8rem;font-weight:500;margin-bottom:28px;box-shadow:0 4px 14px rgba(14,34,64,.05);opacity:0;animation:rise .7s .05s forwards}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue)}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.04;letter-spacing:-.03em;max-width:15ch;opacity:0;animation:rise .8s .15s forwards}
+  h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin-top:24px;font-size:clamp(1.05rem,2vw,1.26rem);color:var(--muted);max-width:54ch;opacity:0;animation:rise .8s .3s forwards}
+  .cta-row{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .8s .45s forwards}
+  .btn-ghost{display:inline-block;border:1px solid var(--line);background:#fff;color:var(--navy);text-decoration:none;padding:11px 22px;border-radius:999px;font-size:.92rem;font-weight:600;transition:border-color .2s,transform .2s}
+  .btn-ghost:hover{border-color:var(--blue);transform:translateY(-2px)}
+  .stats{display:flex;gap:46px;margin-top:60px;flex-wrap:wrap;opacity:0;animation:rise .8s .6s forwards}
+  .stat .n{font-family:var(--display);font-weight:800;font-size:1.8rem;letter-spacing:-.02em;color:var(--navy)}
+  .stat .l{color:var(--muted);font-size:.86rem}
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+  section{padding:80px 0}
+  .eyebrow{color:var(--blue);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;margin-bottom:12px}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-.02em;line-height:1.1;max-width:18ch;color:var(--navy)}
+  .sec-lede{color:var(--muted);max-width:56ch;margin-top:14px;font-size:1.05rem}
+
+  /* products */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;transition:transform .25s,box-shadow .25s,border-color .25s;box-shadow:0 6px 20px rgba(14,34,64,.05)}
+  .card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(14,34,64,.12);border-color:#cfe0fb}
+  .game-ico{width:64px;height:64px;border-radius:16px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 20px rgba(14,34,64,.18)}
+  .game-ico svg{width:100%;height:100%;display:block}
+  .card h3{font-family:var(--display);font-weight:700;font-size:1.22rem;letter-spacing:-.01em}
+  .card .meta{color:var(--blue);font-size:.78rem;margin-top:3px;font-weight:600}
+  .card p{color:var(--muted);font-size:.94rem;margin-top:8px}
+  .badges{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+  .badge{font-size:.72rem;color:var(--muted);border:1px solid var(--line);padding:4px 11px;border-radius:999px;background:#fff}
+  .badge.live{color:#0c5a2f;background:#dbf6e6;border-color:#bdeccf;font-weight:700}
+  .badge.dev{color:var(--blue-d);background:#e7f0ff;border-color:#cfe0fb;font-weight:600}
+  .store-btn{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:var(--grad);color:#fff;text-decoration:none;font-weight:600;font-size:.84rem;padding:9px 16px;border-radius:11px;transition:transform .2s;box-shadow:0 6px 16px rgba(45,127,240,.3)}
+  .store-btn:hover{transform:translateY(-2px)}
+
+  /* services */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  @media(max-width:760px){.services{grid-template-columns:1fr}}
+  .svc{padding:26px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line)}
+  .svc .ic{font-size:1.6rem;margin-bottom:12px}
+  .svc h4{font-family:var(--display);font-weight:700;font-size:1.1rem;margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:.92rem}
+
+  /* about */
+  .about{background:linear-gradient(160deg,#F4F8FF,#FFFFFF);border:1px solid var(--line);border-radius:28px;padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;box-shadow:0 10px 30px rgba(14,34,64,.06)}
+  @media(max-width:760px){.about{grid-template-columns:1fr;gap:28px}}
+  .about ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:13px}
+  .about li{display:flex;gap:12px;color:var(--navy);font-size:.98rem}
+  .about li b{color:var(--muted);font-weight:500;min-width:118px;display:inline-block}
+  .check{color:var(--blue);flex:none;font-weight:700}
+  .biglogo{display:flex;align-items:center;justify-content:center}
+  .biglogo svg{width:min(100%,300px);height:auto}
+
+  /* contact */
+  .contact{text-align:center;background:var(--grad);border-radius:28px;padding:clamp(40px,6vw,70px);color:#fff;box-shadow:0 18px 44px rgba(26,87,192,.32)}
+  .contact h2{color:#fff;margin:0 auto}
+  .contact p{color:rgba(255,255,255,.9);max-width:46ch;margin:14px auto 28px;font-weight:400}
+  .mail{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--navy);text-decoration:none;padding:15px 28px;border-radius:999px;font-weight:600;font-size:1.02rem;transition:transform .2s}
+  .mail:hover{transform:translateY(-2px)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:46px 0 60px;margin-top:16px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot-links{display:flex;gap:24px;flex-wrap:wrap}
+  .foot-links a{color:var(--muted);text-decoration:none;font-size:.9rem}
+  .foot-links a:hover{color:var(--blue)}
+  .copy{color:var(--muted);font-size:.84rem;margin-top:22px}
+  .verify-note{font-size:.82rem;color:var(--muted);margin-top:10px;max-width:60ch}
+  .verify-note code{background:var(--surface-2);padding:2px 7px;border-radius:6px;color:var(--blue-d);font-size:.92em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">
+        <svg class="mk" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="tileb_h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A8DFF"/><stop offset=".55" stop-color="#1A57C0"/><stop offset="1" stop-color="#0C2148"/></linearGradient>
+          </defs>
+          <rect x="16" y="16" width="224" height="224" rx="58" fill="url(#tileb_h)"/>
+          <text x="128" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="132" letter-spacing="-6" fill="#fff">TA</text>
+          <path d="M196 60 L200 72 L212 76 L200 80 L196 92 L192 80 L180 76 L192 72 Z" fill="#9FD0FF"/>
+        </svg>
+        <span class="txt"><b>Thuỳ Anh</b><span>Solution</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#products">Sản phẩm</a>
+        <a href="#services">Dịch vụ</a>
+        <a href="#about">Về chúng tôi</a>
+        <a class="btn" href="#contact">Liên hệ</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span> App &amp; Game Publisher · iOS | Android</div>
+    <h1>Chúng tôi tạo ra <em>app &amp; game</em> mọi người yêu thích.</h1>
+    <p class="lede">Thuỳ Anh Solution thiết kế, phát triển và phát hành ứng dụng cùng trò chơi di động trên App Store và CH Play — tập trung vào trải nghiệm mượt mà và sản phẩm bền vững.</p>
+    <div class="cta-row">
+      <a class="btn" href="#products">Khám phá sản phẩm</a>
+      <a class="btn-ghost" href="#contact">Hợp tác cùng chúng tôi</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">iOS &amp; Android</div><div class="l">Hai nền tảng</div></div>
+      <div class="stat"><div class="n">Apps &amp; Games</div><div class="l">Lĩnh vực phát triển</div></div>
+      <div class="stat"><div class="n">2024+</div><div class="l">Hoạt động</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <p class="eyebrow">Sản phẩm</p>
+    <h2>Trò chơi của chúng tôi</h2>
+    <p class="sec-lede">Các trò chơi do Thuỳ Anh Solution phát triển và phát hành trên App Store và CH Play.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="game-ico">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5BD06B"/><stop offset="1" stop-color="#1E9E50"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#gf)"/>
+            <circle cx="60" cy="64" r="30" fill="#FFFFFF" fill-opacity=".16"/>
+            <path d="M60 30 C44 44 44 70 60 86 C76 70 76 44 60 30 Z" fill="#EFFFF0"/>
+            <path d="M60 36 L60 84" stroke="#1E9E50" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="44" cy="40" r="5" fill="#FFD84D"/>
+          </svg>
+        </div>
+        <h3>Rừng Vui Vẻ</h3>
+        <p class="meta">Happy Forest · Puzzle</p>
+        <p>Game nối thú dễ thương: nối 3+ con vật cùng loại, tạo ngôi sao và chinh phục 100 màn chơi.</p>
+        <div class="badges"><span class="badge live">● Đã phát hành</span><span class="badge">App Store</span></div>
+        <a class="store-btn" href="https://apps.apple.com/us/app/r%E1%BB%ABng-vui-v%E1%BA%BB/id6776203174" target="_blank" rel="noopener"> Tải trên App Store</a>
+      </div>
+
+      <div class="card">
+        <div class="game-ico">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9433A"/><stop offset="1" stop-color="#8E1B12"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#gm)"/>
+            <rect x="38" y="28" width="44" height="64" rx="8" fill="#F7F2E4"/>
+            <rect x="38" y="28" width="44" height="64" rx="8" fill="none" stroke="#C9A24B" stroke-width="3"/>
+            <circle cx="60" cy="52" r="9" fill="#1E9E50"/>
+            <path d="M60 64 L60 82 M52 73 L68 73" stroke="#D9433A" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Mahjong Emperor</h3>
+        <p class="meta">Mahjong / Puzzle</p>
+        <p>Trò chơi Mahjong giải đố cổ điển với phong cách hoàng gia. Đang trong quá trình phát triển.</p>
+        <div class="badges"><span class="badge dev">◐ Đang phát triển</span></div>
+      </div>
+
+      <div class="card">
+        <div class="game-ico">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#1B2046"/>
+            <rect x="24" y="24" width="20" height="11" rx="2" fill="#FF7A59"/><rect x="50" y="24" width="20" height="11" rx="2" fill="#FFC24B"/><rect x="76" y="24" width="20" height="11" rx="2" fill="#34E5A8"/>
+            <rect x="24" y="40" width="20" height="11" rx="2" fill="#FFC24B"/><rect x="50" y="40" width="20" height="11" rx="2" fill="#34E5A8"/><rect x="76" y="40" width="20" height="11" rx="2" fill="#FF7A59"/>
+            <circle cx="60" cy="76" r="6" fill="#fff"/>
+            <rect x="40" y="92" width="40" height="8" rx="4" fill="#5AA6F2"/>
+          </svg>
+        </div>
+        <h3>Brick Breaker Emperor</h3>
+        <p class="meta">Arcade</p>
+        <p>Game phá gạch arcade cổ điển, nhịp độ nhanh và gây nghiện. Đang trong quá trình phát triển.</p>
+        <div class="badges"><span class="badge dev">◐ Đang phát triển</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <p class="eyebrow">Năng lực</p>
+    <h2>Chúng tôi làm gì</h2>
+    <div class="services">
+      <div class="svc"><div class="ic">📱</div><h4>Phát triển ứng dụng</h4><p>Xây dựng app di động iOS &amp; Android với hiệu năng cao và giao diện thân thiện.</p></div>
+      <div class="svc"><div class="ic">🎮</div><h4>Phát triển game</h4><p>Thiết kế và phát hành trò chơi casual, hyper-casual hấp dẫn người chơi.</p></div>
+      <div class="svc"><div class="ic">📈</div><h4>Tối ưu &amp; kiếm tiền</h4><p>Tích hợp quảng cáo AdMob và tối ưu doanh thu một cách minh bạch, bền vững.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div>
+        <p class="eyebrow">Về chúng tôi</p>
+        <h2>Thuỳ Anh Solution</h2>
+        <p class="sec-lede">Studio chuyên phát triển và phát hành ứng dụng, trò chơi di động. Chúng tôi đặt chất lượng sản phẩm và trải nghiệm người dùng làm trọng tâm.</p>
+        <ul>
+          <li><span class="check">✦</span><span><b>Tên đơn vị:</b> Thuỳ Anh Solution</span></li>
+          <li><span class="check">✦</span><span><b>Lĩnh vực:</b> Phát triển app &amp; game di động</span></li>
+          <li><span class="check">✦</span><span><b>Nền tảng:</b> App Store &amp; Google CH Play</span></li>
+          <li><span class="check">✦</span><span><b>Email:</b> nguyenducngoc100886@gmail.com</span></li>
+        </ul>
+      </div>
+      <div class="biglogo">
+        <svg viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" aria-label="Thuỳ Anh Solution">
+          <defs>
+            <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA6F2"/><stop offset=".55" stop-color="#2C72DA"/><stop offset="1" stop-color="#0E244C"/></linearGradient>
+            <linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A86F0"/><stop offset="1" stop-color="#15347A"/></linearGradient>
+          </defs>
+          <text x="220" y="178" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="150" letter-spacing="-6" fill="url(#blue)">TA</text>
+          <g fill="#2D7FF0">
+            <path d="M335 58 L340 73 L355 78 L340 83 L335 98 L330 83 L315 78 L330 73 Z"/>
+            <path d="M363 116 L365.5 124 L373 126.5 L365.5 129 L363 137 L360.5 129 L353 126.5 L360.5 124 Z"/>
+          </g>
+          <g fill="#E3ECFA"><circle cx="232" cy="166" r="17"/><circle cx="212" cy="172" r="12"/><circle cx="252" cy="172" r="12"/><circle cx="232" cy="180" r="13"/></g>
+          <path d="M232 66 C220 80 216 96 216 108 L216 152 L248 152 L248 108 C248 96 244 80 232 66 Z" fill="#FFFFFF" stroke="#0E244C" stroke-width="4"/>
+          <path d="M216 134 L201 156 L216 150 Z" fill="url(#fin)"/><path d="M248 134 L263 156 L248 150 Z" fill="url(#fin)"/>
+          <circle cx="232" cy="110" r="10.5" fill="#2D7FF0" stroke="#0E244C" stroke-width="3.5"/>
+          <text x="220" y="300" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="800" font-size="60" letter-spacing="1" fill="#0E244C">THUỲ ANH</text>
+          <line x1="70" y1="335" x2="114" y2="335" stroke="#2D7FF0" stroke-width="3" stroke-linecap="round"/>
+          <line x1="326" y1="335" x2="370" y2="335" stroke="#2D7FF0" stroke-width="3" stroke-linecap="round"/>
+          <text x="220" y="343" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="600" font-size="25" letter-spacing="9" fill="#2C72DA">SOLUTION</text>
+          <text x="220" y="392" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="500" font-size="19" letter-spacing="2.5" fill="#5C6E8C">APP &amp; GAME PUBLISHER</text>
+          <text x="220" y="420" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-weight="500" font-size="19" letter-spacing="2" fill="#5C6E8C">iOS | Android</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Liên hệ hợp tác</h2>
+      <p>Bạn muốn hợp tác phát triển, phát hành hoặc quảng bá ứng dụng? Hãy gửi email cho chúng tôi.</p>
+      <a class="mail" href="mailto:nguyenducngoc100886@gmail.com">✉ nguyenducngoc100886@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top">
+        <svg class="mk" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="tileb_f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A8DFF"/><stop offset=".55" stop-color="#1A57C0"/><stop offset="1" stop-color="#0C2148"/></linearGradient></defs>
+          <rect x="16" y="16" width="224" height="224" rx="58" fill="url(#tileb_f)"/>
+          <text x="128" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="132" letter-spacing="-6" fill="#fff">TA</text>
+          <path d="M196 60 L200 72 L212 76 L200 80 L196 92 L192 80 L180 76 L192 72 Z" fill="#9FD0FF"/>
+        </svg>
+        <span class="txt"><b>Thuỳ Anh</b><span>Solution</span></span>
+      </a>
+      <div class="foot-links">
+        <a href="#products">Sản phẩm</a>
+        <a href="#about">Về chúng tôi</a>
+        <a href="privacy-policy.html">Chính sách bảo mật</a>
+        <a href="app-ads.txt">app-ads.txt</a>
+      </div>
+    </div>
+    <p class="verify-note">Trang web này là website chính thức (developer website) của Thuỳ Anh Solution, dùng để xác minh quyền sở hữu ứng dụng qua tệp <code>/app-ads.txt</code> theo chuẩn IAB.</p>
+    <p class="copy">© 2026 Thuỳ Anh Solution. Bảo lưu mọi quyền.</p>
+  </div>
+</footer>
+
+</body>
+</html>
